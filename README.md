@@ -9,14 +9,14 @@ Ensure that you have [carbon](https://github.com/ejholmes/docker-carbon) running
 the `/carbon/host` key in etcd:
 
 ```bash
-$ etcdctl set /carbon/host 10.0.0.10
+$ etcdctl set /statsd/hosted_graphite_api_key ABCDEFG1234567890
 ```
 
 Start up statsd
 
 ```bash
-$ docker run --rm --name statsd --env ETCD=http://<ip>:4001 \
-    -p 8125:8125/udp -p 8126:8126 ejholmes/statsd
+$ docker run -d --name statsd --env ETCD=http://$ETCD_IP:4001 \
+    -p 8125:8125/udp -p 8126:8126 quay.io/tagplay/statsd
 ```
 
 Send some metrics to it:
