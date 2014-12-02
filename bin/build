@@ -1,20 +1,16 @@
 #!/bin/sh
 
 set -e
-
 export DEBIAN_FRONTEND=noninteractive
-
-apt-get update -q
-apt-get install -y curl unzip nodejs
 
 # Install statsd
 cd /opt
-curl -s -k -L https://github.com/etsy/statsd/archive/v0.7.1.zip > statsd.zip
-unzip statsd.zip
-ln -s statsd-0.7.1 statsd
-rm statsd.zip
+curl -s -k -L https://github.com/etsy/statsd/archive/v0.7.2.tar.gz | tar zxv
+ln -s statsd-0.7.2 statsd
+
+# Install statsd backends
+curl -s -k -L https://raw.githubusercontent.com/hostedgraphite/statsdplugin/master/hostedgraphite.js > /opt/statsd/backends/hostedgraphite.js
 
 # Install confd
-curl -s -k -L https://github.com/kelseyhightower/confd/releases/download/v0.3.0/confd_0.3.0_linux_amd64.tar.gz > confd.tar.gz
-tar -zxvf confd.tar.gz
-mv confd /usr/bin/confd
+curl -s -k -L https://github.com/kelseyhightower/confd/releases/download/v0.6.3/confd-0.6.3-linux-amd64 > /usr/bin/confd
+chmod a+x /usr/bin/confd

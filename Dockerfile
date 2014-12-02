@@ -1,4 +1,4 @@
-FROM ubuntu:12.04
+FROM node:0.10-slim
 MAINTAINER Eric Holmes <eric@ejholmes.io>
 
 ENV ETCD http://127.0.0.1:4001

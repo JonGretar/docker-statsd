@@ -1,6 +1,6 @@
 {
-  graphiteHost: "{{ .carbon_host }}",
-  graphitePort: 2003,
+  backends: [ './backends/hostedgraphite' ],
+  hostedGraphiteAPIKey: "{{ getv "/statsd/hosted_graphite_api_key" }}",
   port: 8125,
   flushInterval: 10000
 }
